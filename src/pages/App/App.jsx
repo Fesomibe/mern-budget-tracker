@@ -1,13 +1,21 @@
-import React from 'react';
+import { useState } from 'react';
+import { getUser } from '../../utilities/users-service';
+import './App.css';
+import AuthPage from '../AuthPage/AuthPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Budget from '../../components/Budget/Budget';
 import Remaining from '../../components/Remaining/Remaining';
 import ExpenseTotal from '../../components/ExpenseTotal/ExpenseTotal';
 
 
-const App = () => {
+export default function App() {
+	const [user, setUser] = useState(getUser());
+  
 	return (
-			<div className='container'>
+	  <main className="App">
+		{ user ?
+			<>
+			 <div className='container'>
 				<h1 className='mt-3'>My Budget Planner</h1>
 				<div className='row mt-3'>
 					<div className='col-sm'>
@@ -21,7 +29,10 @@ const App = () => {
 					</div>
 				</div>
 			</div>
-	);
-};
-
-export default App;
+			</>
+            :
+            <AuthPage setUser={setUser} />
+      }
+    </main>
+  );
+}
