@@ -11,7 +11,7 @@ export default function NavBar({ user, setUser }) {
     <nav>
      { user ?
         <>
-      <Link to="/Budgets">New Budgets</Link>
+      <Link to="/budgets/new">New Budget</Link>
       &nbsp; | &nbsp;
       <span>Your Budgets</span>
       &nbsp;&nbsp;

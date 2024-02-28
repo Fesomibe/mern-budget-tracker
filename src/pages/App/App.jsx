@@ -19,6 +19,7 @@ export default function App() {
         <Route path='/' element={<HomePage />} />
         {user ? (
 			<>
+				<Route path='/budget/new' element={<NewBudgetPage />} />
 				<Route path='/budget' element={<BudgetPage />} />
 				<Route path='/dashboard' element={<DashboardPage />} />
 			</>
