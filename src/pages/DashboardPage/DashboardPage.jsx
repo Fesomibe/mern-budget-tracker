@@ -1,4 +1,4 @@
-import Budget from '../../components/Budget/Budget';
+import Budget from '../BudgetPage/BudgetPage';
 import Remaining from '../../components/Remaining/Remaining';
 import ExpenseTotal from '../../components/ExpenseTotal/ExpenseTotal';
 import ExpenseList from '../../components/ExpenseList/ExpenseList';
