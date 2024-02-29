@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ExpenseTotal = () => {
+const ExpenseTotal = ({totalExpenses}) => {
 	return (
 		<div className='alert alert-primary'>
-			<span>Spent so far: $1000</span>
+			<span>Spent so far: ${totalExpenses}</span>
 		</div>
 	);
 };

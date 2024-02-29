@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function BudgetPage() {
+export default function BudgetPage({budgetAmount}) {
 	return (
 		<div className='alert alert-secondary'>
-			<span>Budget: $2000</span>
+			<span>Budget: ${budgetAmount}</span>
 		</div>
 	);
 }

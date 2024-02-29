@@ -36,7 +36,7 @@ export default function App() {
 			<>
 				<Route path='/budget/new' element={<NewBudgetPage budgets={budgets} handleAddBudget={handleAddBudget} />} />
 				<Route path='/budget' element={<BudgetPage />} />
-				<Route path='/dashboard' element={<DashboardPage />} />
+				<Route path='/dashboard' element={<DashboardPage budgets={budgets} />} />
 			</>
         ) : (
           <Route path='/auth' element={<AuthPage setUser={setUser} />} />
