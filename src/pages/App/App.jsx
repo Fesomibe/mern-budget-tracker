@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getUser } from '../../utilities/users-service';
 import './App.css';
+import * as budgetsAPI from '../../utilities/budgets-api';
 import AuthPage from '../AuthPage/AuthPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router-dom';
@@ -22,6 +23,10 @@ export default function App() {
 	}
   }, [user]);
 
+  function handleAddBudget(newBudget) {
+	setBudgets([newBudget, ...budgets]);
+  }
+
   return (
     <main className="App">
       <NavBar user={user} setUser={setUser} />
@@ -29,7 +34,7 @@ export default function App() {
         <Route path='/' element={<HomePage />} />
         {user ? (
 			<>
-				<Route path='/budget/new' element={<NewBudgetPage />} />
+				<Route path='/budget/new' element={<NewBudgetPage budgets={budgets} handleAddBudget={handleAddBudget} />} />
 				<Route path='/budget' element={<BudgetPage />} />
 				<Route path='/dashboard' element={<DashboardPage />} />
 			</>

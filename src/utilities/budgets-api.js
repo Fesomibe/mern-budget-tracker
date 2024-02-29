@@ -5,3 +5,6 @@ export function getAll() {
   return sendRequest(BASE_URL);
 }
 
+export function addBudget(budgetData) {
+  return sendRequest(BASE_URL, 'POST', budgetData);
+}
