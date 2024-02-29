@@ -1,27 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const AddExpenseForm = () => {
+export default function AddExpenseForm({ onAddExpense }) {
+  const [expense, setExpense] = useState({
+    name: '',
+    cost: '',
+  });
+
+  const handleChange = (evt) => {
+    setExpense({
+      ...expense,
+      [evt.target.id]: evt.target.value,
+    });
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onAddExpense(expense);
+  
+    // Reset the form
+    setExpense({
+      name: '',
+      cost: '',
+    });
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className='row'>
         <div className='col-sm'>
           <label htmlFor='name' style={{ color: '#333' }}>Name</label>
           <input
-            required='required'
+            required
             type='text'
             className='form-control'
             id='name'
-          ></input>
+            value={expense.name}
+            onChange={handleChange}
+          />
         </div>
         <div className='col-sm'>
           <label htmlFor='cost' style={{ color: '#333' }}>Cost</label>
           <input
-            required='required'
+            required
             type='text'
             className='form-control'
             id='cost'
-          ></input>
+            value={expense.cost}
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div className='row'>
@@ -34,5 +60,3 @@ const AddExpenseForm = () => {
     </form>
   );
 };
-
-export default AddExpenseForm;
