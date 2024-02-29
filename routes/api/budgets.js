@@ -11,4 +11,7 @@ router.get('/', ensureLoggedIn, budgetsCtrl.getAll)
 // POST /api/budgets 
 router.post('/', ensureLoggedIn, budgetsCtrl.create)
 
+// POST /api/budgets/:budgetId/expenses
+router.post('/:budgetId/expenses', ensureLoggedIn, budgetsCtrl.createExpense)
+
 module.exports = router;

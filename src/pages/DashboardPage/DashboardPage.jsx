@@ -5,29 +5,23 @@ import Remaining from '../../components/Remaining/Remaining';
 import ExpenseTotal from '../../components/ExpenseTotal/ExpenseTotal';
 import ExpenseList from '../../components/ExpenseList/ExpenseList';
 import AddExpenseForm from '../../components/AddExpenseForm/AddExpenseForm';
+import * as budgetsAPI from '../../utilities/budgets-api';
 
-export default function DashboardPage({ budgets }) {
+export default function DashboardPage({ budgets, handleAddExpense }) {
   const [selectedBudgetId, setSelectedBudgetId] = useState(budgets[0]?._id);
-  const [expenses, setExpenses] = useState([
-    { id: 12, name: 'shopping', cost: 40 },
-    { id: 13, name: 'holiday', cost: 400 },
-    { id: 14, name: 'car service', cost: 50 },
-  ]);
 
   const navigate = useNavigate();
 
   const budget = budgets.find((b) => b._id === selectedBudgetId);
   if (!budget) return navigate('/budget/new');
 
-  const handleAddExpense = (newExpense) => {
-    console.log('Adding new expense:', newExpense);
-    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
+  const addExpense = async (newExpense) => {
+    const updatedBudget = await budgetsAPI.addExpense(newExpense, budget._id);
+    handleAddExpense(updatedBudget);
   };
 
   const handleDeleteExpense = (expenseId) => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.filter((expense) => expense.id !== expenseId)
-    );
+    
   };
 
   return (
@@ -49,7 +43,7 @@ export default function DashboardPage({ budgets }) {
           <Budget budgetAmount={budget.budgetAmount} />
         </div>
         <div className='col-sm'>
-          <Remaining budgetRemaining={budget.budgetRemaining} />
+          <Remaining remainingBudget={budget.remainingBudget} />
         </div>
         <div className='col-sm'>
           <ExpenseTotal totalExpenses={budget.totalExpenses} />
@@ -59,7 +53,7 @@ export default function DashboardPage({ budgets }) {
       <div className='row mt-3'>
         <div className='col-sm'>
           <ExpenseList
-            expenses={expenses}
+            expenses={budget.expenses}
             onDeleteExpense={handleDeleteExpense}
           />
         </div>
@@ -67,7 +61,7 @@ export default function DashboardPage({ budgets }) {
       <h3 className='mt-3'>Add Expense</h3>
       <div className='row mt-3'>
         <div className='col-sm'>
-          <AddExpenseForm onAddExpense={handleAddExpense} />
+          <AddExpenseForm onAddExpense={addExpense} />
         </div>
       </div>
     </div>

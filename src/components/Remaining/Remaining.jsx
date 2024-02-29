@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Remaining({budgetRemaining}) {
+export default function Remaining({remainingBudget}) {
 	return (
 		<div className='alert alert-success'>
-			<span>Remaining: ${budgetRemaining}</span>
+			<span>Remaining: ${remainingBudget}</span>
 		</div>
 	);
 }

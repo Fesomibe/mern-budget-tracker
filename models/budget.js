@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const expenseSchema = new Schema({
-    description: String, 
-    amount: Number
+    name: String, 
+    cost: Number
 }, {
     timestamps: true
 });
@@ -19,7 +19,7 @@ const budgetSchema = new Schema({
 });
 
 budgetSchema.virtual('totalExpenses').get(function() {
-    return this.expenses.reduce((total, expense) => total + expense.amount, 0);
+    return this.expenses.reduce((total, expense) => total + expense.cost, 0);
 });
 
 budgetSchema.virtual('remainingBudget').get(function() {

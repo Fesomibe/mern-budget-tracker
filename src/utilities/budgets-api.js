@@ -8,3 +8,7 @@ export function getAll() {
 export function addBudget(budgetData) {
   return sendRequest(BASE_URL, 'POST', budgetData);
 }
+
+export function addExpense(newExpense, budgetId) {
+  return sendRequest(`${BASE_URL}/${budgetId}/expenses`, 'POST', newExpense);
+}

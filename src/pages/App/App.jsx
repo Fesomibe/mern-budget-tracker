@@ -24,7 +24,12 @@ export default function App() {
   }, [user]);
 
   function handleAddBudget(newBudget) {
-	setBudgets([newBudget, ...budgets]);
+    setBudgets([newBudget, ...budgets]);
+  }
+
+  function handleAddExpense(updatedBudget) {
+    const updatedBudgets = budgets.map(b => b._id === updatedBudget._id ? updatedBudget : b);
+    setBudgets(updatedBudgets);
   }
 
   return (
@@ -36,7 +41,7 @@ export default function App() {
 			<>
 				<Route path='/budget/new' element={<NewBudgetPage budgets={budgets} handleAddBudget={handleAddBudget} />} />
 				<Route path='/budget' element={<BudgetPage />} />
-				<Route path='/dashboard' element={<DashboardPage budgets={budgets} />} />
+				<Route path='/dashboard' element={<DashboardPage budgets={budgets} handleAddExpense={handleAddExpense} />} />
 			</>
         ) : (
           <Route path='/auth' element={<AuthPage setUser={setUser} />} />
