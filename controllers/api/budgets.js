@@ -3,7 +3,8 @@ const Budget = require('../../models/budget');
 module.exports = {
     getAll,
     create,
-    createExpense
+    createExpense,
+    deleteExpense
 };
 
 async function getAll(req, res) {
@@ -22,4 +23,20 @@ async function createExpense(req, res) {
     budget.expenses.push(req.body);
     await budget.save();
     res.json(budget);
+}
+
+async function deleteExpense(req, res) {
+    try {
+        const budget = await Budget.findOne({
+            user: req.user_id,
+            _id: req.params.budgetId
+        });
+        if (!budget) return res.status(401).json('unauthorized')
+        budget.expenses.pop(expenseId)
+        await budget.save();
+        res.json(budget);
+    } catch (error) {
+        console.error('Error deleting expense:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }

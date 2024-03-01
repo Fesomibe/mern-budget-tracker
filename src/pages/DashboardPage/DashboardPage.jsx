@@ -7,8 +7,8 @@ import ExpenseList from '../../components/ExpenseList/ExpenseList';
 import AddExpenseForm from '../../components/AddExpenseForm/AddExpenseForm';
 import * as budgetsAPI from '../../utilities/budgets-api';
 
-export default function DashboardPage({ budgets, handleAddExpense }) {
-  const [selectedBudgetId, setSelectedBudgetId] = useState(budgets[0]?._id);
+export default function DashboardPage({ budgets, handleAddExpense, handleDeleteExpense, selectedBudgetId, setSelectedBudgetId }) {
+  // const [selectedBudgetId, setSelectedBudgetId] = useState(budgets[0]?._id);
 
   const navigate = useNavigate();
 
@@ -19,10 +19,7 @@ export default function DashboardPage({ budgets, handleAddExpense }) {
     const updatedBudget = await budgetsAPI.addExpense(newExpense, budget._id);
     handleAddExpense(updatedBudget);
   };
-
-  const handleDeleteExpense = (expenseId) => {
-    
-  };
+  
 
   return (
     <div className='container'>
@@ -54,7 +51,7 @@ export default function DashboardPage({ budgets, handleAddExpense }) {
         <div className='col-sm'>
           <ExpenseList
             expenses={budget.expenses}
-            onDeleteExpense={handleDeleteExpense}
+            handleDeleteExpense={handleDeleteExpense}
           />
         </div>
       </div>

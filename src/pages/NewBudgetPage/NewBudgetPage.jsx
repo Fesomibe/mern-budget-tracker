@@ -1,49 +1,96 @@
-import { useState } from "react"; 
+// NewBudgetPage.jsx
+
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as budgetsAPI from '../../utilities/budgets-api';
 
-export default function NewBudgetPage({budgets, handleAddBudget}) {
-    const [formData, setFormData] = useState({
-        title: '',
-        budgetAmount: ''
-    });
-    const navigate = useNavigate();
+export default function NewBudgetPage({ budgets, handleAddBudget, setSelectedBudgetId }) {
+  const [formData, setFormData] = useState({
+    title: '',
+    budgetAmount: ''
+  });
+  const [selectedBudget, setSelectedBudget] = useState(null);
+  const navigate = useNavigate();
 
-    function handleChange(evt) {
-        setFormData({
-            ...formData,
-            [evt.target.name]: evt.target.value
-        });
-    };
-
-    async function handleSubmit(evt) {
-        evt.preventDefault();
-        const newBudget = await budgetsAPI.addBudget(formData);
-        handleAddBudget(newBudget);
-        navigate('/dashboard');
+  useEffect(() => {
+    // Set default selected budget if available
+    if (budgets.length > 0) {
+      setSelectedBudget(budgets[0]._id);
     }
-    
-    const existingBudgets = budgets.map(budget => <div key={budget._id}>
-        <p>{budget.title}</p>
-        <p>${budget.budgetAmount}</p>
-    </div>);
-    
-    return (
-        <main>
-            <h1>Add New Budget</h1>
-            <h2>Existing Budgets</h2>
-            {budgets.length ?
-                existingBudgets
-                :
-                <p>You have no budgets yet</p>
-            }
-            <hr />
-            <h2>Enter Budget Information</h2>
-            <form onSubmit={handleSubmit}>
-                <input placeholder="budget name" name="title" value={formData.title} onChange={handleChange} required />
-                <input placeholder="total budget" type="number" name="budgetAmount" value={formData.budgetAmount} onChange={handleChange} required />
-                <button type="submit" >Add Budget</button>
-            </form>
-        </main>
-    );
+  }, [budgets]);
+
+  function handleChange(evt) {
+    setFormData({
+      ...formData,
+      [evt.target.name]: evt.target.value
+    });
+  }
+
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    const newBudget = await budgetsAPI.addBudget(formData);
+    handleAddBudget(newBudget);
+    navigate('/dashboard');
+  }
+
+  function handleSelectBudget() {
+    setSelectedBudgetId(selectedBudget)
+    navigate('/dashboard')
+  }
+
+  return (
+    <main>
+      <h1>Add New Budget</h1>
+
+      <div className="new-budget-form">
+        <h2>Enter Budget Information</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="title">Budget Name</label>
+            <input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Enter budget name"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="budgetAmount">Total Budget</label>
+            <input
+              id="budgetAmount"
+              name="budgetAmount"
+              type="number"
+              placeholder="Enter total budget"
+              value={formData.budgetAmount}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit">Add Budget</button>
+        </form>
+      </div>
+
+      {budgets.length > 0 && (
+        <div className="existing-budgets">
+          <h2>Select an Existing Budget</h2>
+          <select
+            value={selectedBudget}
+            onChange={(e) => setSelectedBudget(e.target.value)}
+          >
+            {budgets.map(budget => (
+              <option key={budget._id} value={budget._id}>
+                {budget.title}
+              </option>
+            ))}
+          </select>
+          <button onClick={handleSelectBudget}>
+            View Selected Budget
+          </button>
+        </div>
+      )}
+    </main>
+  );
 }

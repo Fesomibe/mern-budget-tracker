@@ -14,4 +14,7 @@ router.post('/', ensureLoggedIn, budgetsCtrl.create)
 // POST /api/budgets/:budgetId/expenses
 router.post('/:budgetId/expenses', ensureLoggedIn, budgetsCtrl.createExpense)
 
+// DELETE /api/budgets/:budgetId/expenses
+router.delete('/:budgetId/expenses/:expenseId', ensureLoggedIn, budgetsCtrl.deleteExpense);
+
 module.exports = router;
