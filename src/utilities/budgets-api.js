@@ -13,6 +13,7 @@ export function addExpense(newExpense, budgetId) {
   return sendRequest(`${BASE_URL}/${budgetId}/expenses`, 'POST', newExpense);
 }
 
-export function deleteExpense(expenseId, budgetId) {
+export function deleteExpense(budgetId, expenseId) {
+  console.log(budgetId, expenseId)
   return sendRequest(`${BASE_URL}/${budgetId}/expenses/${expenseId}`, 'DELETE');
 }

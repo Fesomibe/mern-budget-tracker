@@ -20,7 +20,8 @@ export default function App() {
     const [selectedBudgetId, setSelectedBudgetId] = useState(budgets.length && budgets[0]?._id);
 
   const {budgetId} = useParams();
-
+  const budget = budgets && budgets.find(b=>b._id === selectedBudgetId)
+  console.log(budget)
   useEffect(() => {
     async function getAllBudgets() {
       
@@ -45,7 +46,8 @@ export default function App() {
   }
 
   async function handleDeleteExpense(expenseId) {
-    const updatedBudget = await budgetsAPI.deleteExpense(budgetId, expenseId);
+    console.log(expenseId)
+    const updatedBudget = await budgetsAPI.deleteExpense(selectedBudgetId, expenseId);
     const updatedBudgets = budgets.map(b => b._id === updatedBudget._id ? updatedBudget : b);
     setBudgets(updatedBudgets);
   }

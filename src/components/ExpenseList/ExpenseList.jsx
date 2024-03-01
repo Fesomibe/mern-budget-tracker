@@ -9,8 +9,8 @@ export default function ExpenseList({ expenses, handleDeleteExpense }) {
     <ul className='list-group'>
       {expenses.map((expense) => (
         <ExpenseItem
-          key={expense.id} // Keep the key prop if needed
-          id={expense.id}
+          key={expense._id} // Keep the key prop if needed
+          id={expense._id}
           name={expense.name}
           cost={expense.cost}
           handleDeleteExpense={handleDeleteExpense}

@@ -9,7 +9,7 @@ export default function ExpenseItem({ id, name, cost, handleDeleteExpense }) {
       {name}
       <div>
         <span className='badge badge-primary badge-pill mr-3'></span>${cost}
-        <TiDelete size='1.5em' onClick={handleDeleteExpense}></TiDelete>
+        <TiDelete size='1.5em' onClick={()=>handleDeleteExpense(id)}></TiDelete>
       </div>
     </li>
   );

@@ -26,13 +26,15 @@ async function createExpense(req, res) {
 }
 
 async function deleteExpense(req, res) {
+    console.log(req.user._id)
     try {
         const budget = await Budget.findOne({
-            user: req.user_id,
+            user: req.user._id,
             _id: req.params.budgetId
         });
+        console.log(budget)
         if (!budget) return res.status(401).json('unauthorized')
-        budget.expenses.pop(expenseId)
+        budget.expenses.remove(req.params.expenseId)
         await budget.save();
         res.json(budget);
     } catch (error) {
