@@ -1,5 +1,3 @@
-// NewBudgetPage.jsx
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as budgetsAPI from '../../utilities/budgets-api';
@@ -13,7 +11,6 @@ export default function NewBudgetPage({ budgets, handleAddBudget, setSelectedBud
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set default selected budget if available
     if (budgets.length > 0) {
       setSelectedBudget(budgets[0]._id);
     }

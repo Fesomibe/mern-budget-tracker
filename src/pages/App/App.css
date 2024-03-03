@@ -1,52 +1,40 @@
-/* Updated App.css */
-
 .App {
   text-align: center;
-  background-color: #fcf8e3; /* Set your desired background color */
-  padding: 20px; /* Add some padding for better spacing */
+  background-color: #fcf8e3;
+  padding: 20px;
 }
 
 .App-header {
-  background-color: #5bc0de; /* Set your desired header background color */
+  background-color: #5bc0de;
   padding: 20px;
-  border-radius: 10px; /* Add rounded corners for a modern look */
-  margin-bottom: 20px; /* Provide some space between header and content */
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-/* Style the app title */
 .App-title {
   font-size: 2em;
-  color: #333; /* Set the title color */
+  color: #333;
 }
 
-/* Style the links */
 .App-link {
-  color: #d9534f; /* Set your desired link color */
+  color: #d9534f;
   text-decoration: none;
-  margin: 0 10px; /* Add some spacing between links */
+  margin: 0 10px;
 }
 
-/* Add hover effect for links */
 .App-link:hover {
   text-decoration: underline;
 }
 
-/* CustomStyles.css */
-
-/* Change background color */
 body {
   background-color: #f0f0f0;
 }
 
-/* Update the header color */
 .App-header {
-  background-color: #007bff; /* Change to your preferred color */
+  background-color: #007bff;
   color: white;
 }
 
-/* Style the main container */
 .App {
   padding: 20px;
 }
-
-/* Add more styles as needed */

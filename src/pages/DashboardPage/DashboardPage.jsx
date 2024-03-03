@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Budget from '../BudgetPage/BudgetPage';
 import Remaining from '../../components/Remaining/Remaining';
@@ -8,7 +7,6 @@ import AddExpenseForm from '../../components/AddExpenseForm/AddExpenseForm';
 import * as budgetsAPI from '../../utilities/budgets-api';
 
 export default function DashboardPage({ budgets, handleAddExpense, handleDeleteExpense, selectedBudgetId, setSelectedBudgetId }) {
-  // const [selectedBudgetId, setSelectedBudgetId] = useState(budgets[0]?._id);
 
   const navigate = useNavigate();
 

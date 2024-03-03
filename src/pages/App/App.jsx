@@ -1,5 +1,3 @@
-// App.jsx
-
 import React, { useState, useEffect } from 'react';
 import { getUser } from '../../utilities/users-service';
 import './App.css';
@@ -12,7 +10,6 @@ import NavBar from '../../components/NavBar/NavBar';
 import BudgetPage from '../BudgetPage/BudgetPage';
 import NewBudgetPage from '../NewBudgetPage/NewBudgetPage';
 import HomePage from '../HomePage/HomePage';
-import BudgetDetailsPage from '../BudgetDetailsPage/BudgetDetailsPage';  // Import BudgetDetailsPage
 
 export default function App() {
   const [user, setUser] = useState(getUser());
